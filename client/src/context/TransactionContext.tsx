@@ -34,6 +34,7 @@ const TransactionProvider = ({ children }: any) => {
 			...prevState,
 			[name]: e.target.value,
 		}));
+
 	};
 	const checkIfWalletIsConnected = async () => {
 		try {
@@ -53,11 +54,14 @@ const TransactionProvider = ({ children }: any) => {
 		}
 	};
 	const sendTransaction = async () => {
+
+		// try {0x923219D7868143fAa5c40d21C4755074A8Cf57d2
 		try {
-			if (!ethereum) return alert("PLease Install Metamask");
-			const { addressTo, amount, keyword, message } = formData;
-			const transactionContract = getEthereumContract();
-			const parsedAmount = ethers.utils.parseEther(amount);
+			if (!ethereum) return alert("Please Install Metamask");
+			const { addressTo, amount, keyword, message } =await formData;
+			const transactionContract =await getEthereumContract();
+			const parsedAmount = await ethers.utils.parseEther(amount);
+			console.log(transactionContract,parsedAmount)
 			await ethereum.request({
 				method: "eth_sendTransaction",
 				params: [
@@ -69,7 +73,7 @@ const TransactionProvider = ({ children }: any) => {
 					},
 				],
 			});
-			const transactionHash = await transactionContract.addToBlockchain(
+			const transactionHash = await transactionContract.addtoblockchain(
 				addressTo,
 				parsedAmount,
 				message,

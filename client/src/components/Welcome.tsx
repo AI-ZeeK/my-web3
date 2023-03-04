@@ -38,7 +38,7 @@ const Welcome = () => {
 		sendTransaction,
 	}: any = useContext(TransactionContext);
 
-	console.log(connectWallet());
+	console.log(connectWallet);
 
 	// const connectWallet = () => {};
 	const handleSubmit = (e: any) => {
